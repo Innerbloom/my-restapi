@@ -1,14 +1,19 @@
 import {Router} from "express";
-import {createUser, getUsers, updateUser, deleteUser} from "../controllers/user.controllers";
+import {createUser, login} from "../controllers/user.controllers";
+import {check} from "express-validator";
 
 const router = Router();
 
-router.post('/users', createUser);
+router.post('/reg', [
+    check('username', "Имя пользователя не может быть пустым").notEmpty(),
+    check('password', "Пароль не может быть меньше 8 символов").isLength({min:8, max: 30})
+], createUser);
 
-router.get('/users', getUsers);
+router.post('/login', login);
 
-router.put('/users/:id', updateUser);
-
-router.delete("/users/:id", deleteUser);
+//Смена пароля
+//router.put('/users/:id', updateUser);
+//Удаление юзера
+//router.delete("/users/:id", deleteUser);
 
 export default router;

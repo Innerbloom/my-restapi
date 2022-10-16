@@ -1,0 +1,27 @@
+<header class="bg-dark text-white">
+    <div class="d-flex justify-content-between align-items-center p-3"
+            style="background-color: rgba(0, 0, 0, 0.2)">
+
+        <nav class="navbar navbar-expand navbar-dark px-2">
+            <div class="side-nav-button p-2 me-3 text-light" (click)="SideNavToggled()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+
+        <nav class="navbar">
+            <ul class="navbar nav ml-auto">
+                <li>
+<!--                    <a
+                            routerLinkActive="active"
+                            class="text-info text-decoration-none ms-3 p-1"
+                            routerLink="./home"
+                    >Home</a
+                    >-->
+                </li>
+                <button type="button" class="btn btn-info ms-3" (click)="logout()">
+                    Logout
+                </button>
+            </ul>
+        </nav>
+    </div>
+</header>

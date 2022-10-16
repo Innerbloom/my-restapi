@@ -1,14 +1,33 @@
 import {Request, Response} from "express";
 import {User} from '../entities/User';
-const md5 = require('md5')
+import {validationResult} from "express-validator";
+const bcrypt = require ('bcryptjs');
+const jwt = require ('jsonwebtoken');
+const {secret} = require ('./config');
+
+
+const generateAccessToken = (id: any) => {
+    const payload =  {id};
+    return jwt.sign(payload, secret, {expiresIn: '24h'});
+}
+
 
 export const createUser = async (req: Request, res: Response) => {
     try {
-        const {username, password} = req.body
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({message: "Ошибка при регистрации"})
+        }
+        const {username, password} = req.body;
+        const candidate = await User.findOneBy({username})
+        const hashPassword = bcrypt.hashSync(password, 7);
+        if (candidate) {
+            return res.status(400).json({message: "Пользователь существует"})
+        }
 
         const user = new User();
         user.username = username;
-        user.password = md5(password);
+        user.password = hashPassword;
 
         await user.save();
 
@@ -18,22 +37,33 @@ export const createUser = async (req: Request, res: Response) => {
             return res.status(500).json({message: error.message});
         }
     }
-
 }
 
-export const getUsers = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response) => {
     try {
-        const users = await User.find()
-        return res.json(users)
+        const {username, password} = req.body
+        const user = await User.findOneBy({username});
+
+        if (!user) {
+            return res.status(400).json({message: `Пользователь ${username} не найден`});
+        }
+        const validPassword = bcrypt.compareSync(password, user.password)
+        if (!validPassword) {
+            return res.status(401).json({message: "Пароль не верный"});
+        } else {
+            const token = generateAccessToken(user.id)
+            return res.json({token, message: `Добро пожаловать ${username}`})
+        }
+
     }catch (error) {
         if (error instanceof Error) {
-            return res.status(500).json({message: error.message});
+            return res.status(500).json({message: "Ошибка входа"});
         }
     }
-
 }
 
-export const updateUser = async (req: Request, res: Response) => {
+//Смена пароля и удаление юзера
+/*export const updateUser = async (req: Request, res: Response) => {
     const {id} = req.params;
 
     try {
@@ -64,4 +94,4 @@ export const deleteUser = async (req: Request, res: Response) => {
             return res.status(500).json({ message: error.message });
         }
     }
-};
+};*/
