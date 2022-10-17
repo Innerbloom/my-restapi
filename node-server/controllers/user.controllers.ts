@@ -16,13 +16,13 @@ export const createUser = async (req: Request, res: Response) => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            return res.status(400).json({message: "Ошибка при регистрации"})
+            return res.status(402).json({message: "Ошибка при регистрации"})
         }
         const {username, password} = req.body;
         const candidate = await User.findOneBy({username})
         const hashPassword = bcrypt.hashSync(password, 7);
         if (candidate) {
-            return res.status(400).json({message: "Пользователь существует"})
+            return res.status(403).json({message: "Пользователь существует"})
         }
 
         const user = new User();

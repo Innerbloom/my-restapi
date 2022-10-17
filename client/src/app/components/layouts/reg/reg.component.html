@@ -21,6 +21,9 @@
                                 <label class="form-label" for="typePasswordX">Password</label>
                                 <p *ngIf="this.regForm.get('password')?.invalid && this.regForm.get('password')?.touched"><small class="text-danger">Password is required (min. length = 6)</small></p>
                             </div>
+                            <div class="mb-4">
+                                <p><small class="text-danger">{{this.error}}</small></p>
+                            </div>
                             <button [disabled]="regForm.invalid" class="btn btn-outline-light btn-lg px-5" type="submit">Submit</button>
                         </form>
                         <form>

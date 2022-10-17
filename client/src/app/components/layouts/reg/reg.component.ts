@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class RegComponent implements OnInit {
 
   regForm!: FormGroup;
+  error: any;
 
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -35,8 +36,13 @@ export class RegComponent implements OnInit {
     this.authService.regUser(this.regForm.value).subscribe( () => {
       this.router.navigate(['login'])
       alert("Вы успещно зарегестрировались")
-    }, error => {
+    }, (error) => {
       this.regForm.enable()
+      if (error.status == 403) {
+        this.error = "The user exists.";
+      } else {
+        this.error = "Registration error.";
+      }
     })
   }
 

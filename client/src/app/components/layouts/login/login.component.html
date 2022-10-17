@@ -6,6 +6,7 @@
 
                     <div class="mb-md-5 mt-md-4 pb-5">
 
+
                         <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                         <p class="text-white-50 mb-5">Please enter your login and password!</p>
 
@@ -19,10 +20,13 @@
                             <div class="form-outline form-white mb-4">
                                 <input formControlName="password" type="password" id="typePasswordX" class="form-control form-control-lg"/>
                                 <label class="form-label" for="typePasswordX">Password</label>
-                                <p *ngIf="this.loginForm.get('password')?.invalid && this.loginForm.get('password')?.touched"><small class="text-danger">Password is required (min. length = 8)</small></p>
+                                <p *ngIf="this.loginForm.get('password')?.invalid && this.loginForm.get('password')?.touched"><small class="text-danger">Password is required (min. length = 6)</small></p>
                             </div>
                                 <button [disabled]="loginForm.invalid" class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                         </form>
+                    </div>
+                    <div class="mb-4">
+                        <p><small class="text-danger">{{this.error}}</small></p>
                     </div>
                     <div>
                         <p class="mb-0">Don't have an account? <a routerLink="../reg" class="text-white-50 fw-bold">Sign Up</a></p>

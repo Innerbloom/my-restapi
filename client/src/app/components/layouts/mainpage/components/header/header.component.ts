@@ -8,6 +8,7 @@ import {AuthService} from "../../../../../services/auth.service";
 })
 export class HeaderComponent implements OnInit {
 
+
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean = false;
 
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
+
   }
 
   logout() {

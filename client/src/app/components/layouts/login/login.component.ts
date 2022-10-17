@@ -12,6 +12,7 @@ import {token} from "morgan";
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
+  error: any;
 
   constructor(private authService: AuthService,
               private router: Router) { }
@@ -36,11 +37,17 @@ export class LoginComponent implements OnInit {
   submitLogin() {
     if(this.loginForm.valid){
       this.authService.loginUser(this.loginForm.value).subscribe(result => {
-        alert(result.message);
         localStorage.setItem('token', result);
+        alert(result.message);
         this.router.navigate(['mainpage']);
-      },(err) =>  {
-        alert('Не верный пароль');
+      },(error) =>  {
+        if (error.status == 401) {
+          this.error = "Wrong password.";
+        } else if (error.status == 400) {
+          this.error = "The user does not exist.";
+        } else {
+          this.error = "Login error.";
+        }
       })
     }
   }
