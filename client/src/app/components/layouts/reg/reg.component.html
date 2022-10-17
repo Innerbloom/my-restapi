@@ -1,0 +1,34 @@
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+
+                    <div class="mb-md-5 mt-md-4 pb-5">
+
+                        <h2 class="fw-bold mb-2 text-uppercase">Registration</h2>
+                        <p class="text-white-50 mb-5">Please enter your login and password!</p>
+
+                        <form [formGroup]="regForm" (ngSubmit)="regSubmited()">
+                            <div class="form-outline form-white mb-4">
+                                <input formControlName="username" type="username" id="typeEmailX" class="form-control form-control-lg"/>
+                                <label class="form-label" for="typeEmailX">Login</label>
+                                <p *ngIf="this.regForm.get('username')?.invalid && this.regForm.get('username')?.touched"><small class="text-danger">User is required</small></p>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input formControlName="password" type="password" id="typePasswordX" class="form-control form-control-lg"/>
+                                <label class="form-label" for="typePasswordX">Password</label>
+                                <p *ngIf="this.regForm.get('password')?.invalid && this.regForm.get('password')?.touched"><small class="text-danger">Password is required (min. length = 6)</small></p>
+                            </div>
+                            <button [disabled]="regForm.invalid" class="btn btn-outline-light btn-lg px-5" type="submit">Submit</button>
+                        </form>
+                        <form>
+                        <button routerLink="../login" class="back btn btn-outline-light btn-lg px-5" type="back">Back</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
