@@ -6,7 +6,7 @@ const router = Router();
 
 router.post('/reg', [
     check('username', "Имя пользователя не может быть пустым").notEmpty(),
-    check('password', "Пароль не может быть меньше 8 символов").isLength({min:8, max: 30})
+    check('password', "Пароль не может быть меньше 6 символов").isLength({min:6, max: 30})
 ], createUser);
 
 router.post('/login', login);
