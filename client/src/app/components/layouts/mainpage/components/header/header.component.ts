@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {AuthService} from "../../../../../services/auth.service";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-header',
@@ -8,21 +9,27 @@ import {AuthService} from "../../../../../services/auth.service";
 })
 export class HeaderComponent implements OnInit {
 
+  today = new Date();
+  myDate = '';
+
 
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean = false;
 
 
-  constructor(private authService: AuthService) { }
+
+  constructor(private authService: AuthService) {
+    this.myDate = formatDate(this.today, 'd.M.yy h:mm a', 'en-US', 'UTS+3')
+  }
 
 
   ngOnInit(): void {
-
   }
 
   logout() {
     this.authService.logout()
   }
+
 
   SideNavToggled() {
     this.menuStatus = !this.menuStatus;
