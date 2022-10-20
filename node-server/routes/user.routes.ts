@@ -15,5 +15,4 @@ router.post('/login', login);
 //router.put('/users/:id', updateUser);
 //Удаление юзера
 //router.delete("/users/:id", deleteUser);
-
 export default router;

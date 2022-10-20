@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
-import {User} from '../entities/User';
+import {Logs, User} from '../entities/User';
 import {validationResult} from "express-validator";
+import {AppDataSource} from "../db";
 const bcrypt = require ('bcryptjs');
 const jwt = require ('jsonwebtoken');
 const {secret} = require ('./config');
@@ -10,6 +11,8 @@ const generateAccessToken = (id: any) => {
     const payload =  {id};
     return jwt.sign(payload, secret, {expiresIn: '24h'});
 }
+
+export type enumEvent = "Login" | "Registration";
 
 
 export const createUser = async (req: Request, res: Response) => {
@@ -28,8 +31,16 @@ export const createUser = async (req: Request, res: Response) => {
         const user = new User();
         user.username = username;
         user.password = hashPassword;
+        await user.save()
 
-        await user.save();
+
+        await AppDataSource
+            .createQueryBuilder()
+            .insert()
+            .into(Logs)
+            .values({login: user.username, type: "Registration"})
+            .execute();
+
 
         return res.json(user);
     } catch (error) {
@@ -51,6 +62,14 @@ export const login = async (req: Request, res: Response) => {
         if (!validPassword) {
             return res.status(401).json({message: "Пароль не верный"});
         } else {
+
+            await AppDataSource
+                .createQueryBuilder()
+                .insert()
+                .into(Logs)
+                .values({login: user.username, type: "Login"})
+                .execute();
+
             const token = generateAccessToken(user.id)
             return res.json({token, message: `Добро пожаловать ${username}`})
         }

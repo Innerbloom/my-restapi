@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {AuthService} from "../../../../../services/auth.service";
-import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-header',
@@ -9,9 +8,6 @@ import {formatDate} from "@angular/common";
 })
 export class HeaderComponent implements OnInit {
 
-  today = new Date();
-  myDate = '';
-
 
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean = false;
@@ -19,7 +15,6 @@ export class HeaderComponent implements OnInit {
 
 
   constructor(private authService: AuthService) {
-    this.myDate = formatDate(this.today, 'd.M.yy h:mm a', 'en-US', 'UTS+3')
   }
 
 
