@@ -24,7 +24,10 @@ export class AuthService {
   }
 
   logout() {
-    this.router.navigate(['login']);
+    if (confirm('Are you sure?')) {
+    localStorage.removeItem('token');
+    }
+    return this.router.navigate(['login']);
   }
 
 
@@ -36,4 +39,3 @@ export class AuthService {
     return this.http.post(this.apiReg, userReg);
   }
 }
-

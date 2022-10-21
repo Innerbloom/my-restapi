@@ -5,28 +5,32 @@ import {Component, Input, OnInit} from '@angular/core';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
+
 export class SidebarComponent implements OnInit {
 
-  @Input() sideNavStatus: boolean = false;
+  @Input()
+  sideNavStatus: boolean = false;
 
-  list = [
+     public list: List[] = [
     {
-      number: '1',
+      number: 1,
       name: 'Home',
-      icon: 'fa-solid fa-house'
+      icon: 'fa-solid fa-house',
+      routerLink: 'home'
     },
     {
-      number: '2',
+      number: 2,
       name: 'Analytics',
       icon: 'fa-solid fa-chart-line'
     },
     {
-      number: '3',
-      name: 'Products',
-      icon: 'fa-solid fa-box'
+      number: 3,
+      name: 'Logs',
+      icon: 'fa-solid fa-chart-simple',
+      routerLink: 'logs',
     },
     {
-      number: '4',
+      number: 4,
       name: 'About',
       icon: 'fa-solid fa-circle-info'
     }
@@ -37,4 +41,11 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+}
+
+export interface List {
+  number: number;
+  name: string;
+  icon: string;
+  routerLink?: string
 }

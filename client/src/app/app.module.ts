@@ -9,20 +9,26 @@ import { NotFoundComponent } from './components/layouts/not-found/not-found.comp
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { RegComponent } from './components/layouts/reg/reg.component';
+import { LogsComponent } from './components/layouts/mainpage/components/logs/logs.component';
+import {MainpageModule} from "./components/layouts/mainpage/mainpage.module";
+import {LogoutComponent} from "./components/layouts/mainpage/components/logout/logout.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NotFoundComponent,
-    RegComponent
+    RegComponent,
+    LogsComponent,
+    LogoutComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         NgbModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MainpageModule
     ],
   providers: [],
   bootstrap: [AppComponent]

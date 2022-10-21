@@ -10,16 +10,21 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 
 @NgModule({
-  declarations: [
-    FooterComponent,
-    HeaderComponent,
-    HomeComponent,
-    MainpageDashboardComponent,
-    SidebarComponent
-  ],
-  imports: [
-    CommonModule,
-    MainpageRoutingModule
-  ]
+    declarations: [
+        FooterComponent,
+        HeaderComponent,
+        HomeComponent,
+        MainpageDashboardComponent,
+        SidebarComponent
+    ],
+    exports: [
+        HeaderComponent,
+        SidebarComponent,
+        FooterComponent
+    ],
+    imports: [
+        CommonModule,
+        MainpageRoutingModule
+    ]
 })
 export class MainpageModule { }

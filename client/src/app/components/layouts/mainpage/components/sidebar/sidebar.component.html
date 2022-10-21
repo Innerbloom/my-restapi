@@ -3,7 +3,7 @@
         <li class="nav-list-item" *ngFor="let item of list">
             <i class="{{item.icon}}"></i>
             <span>
-                <a href="#">{{item.name}}</a>
+                <a class="sidenav-nav-link" [routerLink]="item.routerLink">{{item.name}}</a>
             </span>
     </ul>
-</div>
+</div>›

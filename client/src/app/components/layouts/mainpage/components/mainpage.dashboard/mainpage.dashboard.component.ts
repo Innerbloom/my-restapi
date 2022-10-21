@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainpageDashboardComponent implements OnInit {
 
-  sideNavStstus: boolean = false;
+  sideNavStatus: boolean = false;
 
   constructor() { }
 

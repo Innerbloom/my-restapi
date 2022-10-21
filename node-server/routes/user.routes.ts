@@ -2,6 +2,7 @@ import {Router} from "express";
 import {createUser, login} from "../controllers/user.controllers";
 import {check} from "express-validator";
 
+
 const router = Router();
 
 router.post('/reg', [
@@ -10,6 +11,7 @@ router.post('/reg', [
 ], createUser);
 
 router.post('/login', login);
+router.post('/log', );
 
 //Смена пароля
 //router.put('/users/:id', updateUser);
