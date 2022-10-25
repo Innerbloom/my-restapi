@@ -7,6 +7,15 @@
 
         <div class="display-area p-3" [ngClass]="{'display-area-shrink': sideNavStatus}">
             <p class="fs-1 fw-bold fst-italic">LOGS</p>
+
+            <ag-grid-angular
+                    style="width: 800px; height: 500px;"
+                    class="ag-theme-alpine"
+                    [rowData]="rowData"
+                    [columnDefs]="columnDefs"
+            >
+            </ag-grid-angular>
+
         </div>
     </main>
 </div>

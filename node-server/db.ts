@@ -1,5 +1,6 @@
 import {DataSource} from 'typeorm';
-import {Logs, User} from "./entities/User";
+import {User} from "./entities/User";
+import {Logs} from "./entities/Logs";
 
 export const AppDataSource = new DataSource({
     type: 'mysql',

@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
-import {Logs, User} from '../entities/User';
+import {User} from '../entities/User';
+import {Logs} from "../entities/Logs";
 import {validationResult} from "express-validator";
 import {AppDataSource} from "../db";
 const bcrypt = require ('bcryptjs');

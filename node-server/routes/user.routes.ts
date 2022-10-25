@@ -9,12 +9,14 @@ router.post('/reg', [
     check('username', "Имя пользователя не может быть пустым").notEmpty(),
     check('password', "Пароль не может быть меньше 6 символов").isLength({min:6, max: 30})
 ], createUser);
-
 router.post('/login', login);
-router.post('/log', );
+
+
+//router.post('/logs', createUser, login);
 
 //Смена пароля
 //router.put('/users/:id', updateUser);
 //Удаление юзера
 //router.delete("/users/:id", deleteUser);
+
 export default router;
